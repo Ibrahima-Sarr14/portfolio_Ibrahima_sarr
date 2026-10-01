@@ -62,7 +62,9 @@ if ('IntersectionObserver' in window) {
 const liens = [...nav.querySelectorAll('a')];
 const pilule = nav.querySelector('.nav__pilule');
 const bureau = window.matchMedia('(min-width: 901px)');
-let lienActif = null;
+// Sur une page secondaire (étude de cas), le lien marqué aria-current reste actif
+let lienActif = nav.querySelector('[aria-current="page"]');
+if (lienActif) lienActif.classList.add('actif');
 
 function placerPilule(cible) {
   liens.forEach(l => l.classList.toggle('sous-pilule', l === cible));
@@ -81,7 +83,11 @@ window.addEventListener('resize', () => placerPilule(lienActif));
 if (document.fonts) document.fonts.ready.then(() => placerPilule(lienActif));
 
 // ----- Lien du menu actif selon la section visible -----
-const sections = liens.map(l => document.querySelector(l.getAttribute('href')));
+// Seuls les liens internes (#section) suivent le défilement
+const sections = liens.map(l => {
+  const cible = l.getAttribute('href');
+  return cible.startsWith('#') ? document.querySelector(cible) : null;
+});
 const obsSections = new IntersectionObserver(entrees => {
   entrees.forEach(entree => {
     if (!entree.isIntersecting) return;

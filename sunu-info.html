@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ===== Référencement (SEO) ===== -->
+  <title>Sunu Info, étude de cas — Ibrahima SARR</title>
+  <meta name="description" content="Étude de cas de Sunu Info, le portail d'orientation après le bac au Sénégal conçu et développé par Ibrahima SARR : problème, solution, choix techniques et apprentissages.">
+  <meta name="author" content="Ibrahima SARR">
+  <link rel="canonical" href="https://portfolioibrahimasarr.vercel.app/sunu-info.html">
+  <meta name="theme-color" content="#16122b">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Ibrahima SARR">
+  <meta property="og:title" content="Sunu Info, étude de cas — Ibrahima SARR">
+  <meta property="og:description" content="Comment j'ai conçu un portail d'orientation gratuit pour les bacheliers sénégalais.">
+  <meta property="og:url" content="https://portfolioibrahimasarr.vercel.app/sunu-info.html">
+  <meta property="og:image" content="https://portfolioibrahimasarr.vercel.app/images/sunu-info.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sunu Info, étude de cas — Ibrahima SARR">
+  <meta name="twitter:description" content="Comment j'ai conçu un portail d'orientation gratuit pour les bacheliers sénégalais.">
+  <meta name="twitter:image" content="https://portfolioibrahimasarr.vercel.app/images/sunu-info.png">
+
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    try {
+      var t = localStorage.getItem('theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  </script>
+</head>
+<body>
+
+  <div class="fond-deco" aria-hidden="true">
+    <span class="tache tache--1"></span>
+    <span class="tache tache--2"></span>
+    <span class="tache tache--3"></span>
+  </div>
+
+  <!-- ===== EN-TÊTE ===== -->
+  <header class="entete" id="entete">
+    <div class="conteneur entete__barre">
+      <a href="index.html" class="logo" aria-label="Retour à l'accueil du portfolio">
+        <img class="logo__mark" src="images/ibrahima-sarr-portrait.jpg" alt="" width="40" height="40">
+        <span class="logo__texte"><span class="logo__nom">Ibrahima Sarr</span><span class="logo__role">Développeur web</span></span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <span class="nav__pilule" aria-hidden="true"></span>
+        <a href="index.html#accueil">Accueil</a>
+        <a href="index.html#apropos">À propos</a>
+        <a href="index.html#competences">Compétences</a>
+        <a href="index.html#projets" aria-current="page">Projet</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="entete__actions">
+        <button class="btn-icone" id="btn-theme" type="button" aria-label="Changer de thème">
+          <svg class="ico-lune" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="ico-soleil" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <button class="btn-icone burger" id="btn-menu" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <span class="progression" id="progression" aria-hidden="true"></span>
+  </header>
+
+  <main class="cas" id="haut-de-page">
+
+    <!-- ===== EN-TÊTE DE L'ÉTUDE DE CAS ===== -->
+    <section class="cas__intro">
+      <div class="conteneur">
+        <a href="index.html#projets" class="cas__retour">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+          Retour au portfolio
+        </a>
+        <p class="surtitre">Étude de cas</p>
+        <h1>Sunu <span class="degrade">Info</span></h1>
+        <p class="cas__accroche">
+          Le portail d'orientation qui aide les bacheliers sénégalais à choisir leur filière,
+          trouver leur école et ne rater aucune date importante.
+        </p>
+
+        <dl class="cas__fiche verre">
+          <div><dt>Mon rôle</dt><dd>Conception, design et développement</dd></div>
+          <div><dt>Période</dt><dd>Depuis août 2026</dd></div>
+          <div><dt>Technologies</dt><dd>HTML, CSS, JavaScript, Supabase, Vercel</dd></div>
+          <div><dt>Statut</dt><dd><span class="point"></span> En ligne</dd></div>
+        </dl>
+
+        <div class="cas__boutons">
+          <a href="https://portail-sunu-info.vercel.app" target="_blank" rel="noopener" class="btn btn--plein">
+            Voir le site en ligne
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capture principale dans un faux navigateur -->
+    <div class="conteneur">
+      <figure class="navigateur revele">
+        <div class="navigateur__barre" aria-hidden="true">
+          <span></span><span></span><span></span>
+          <em>portail-sunu-info.vercel.app</em>
+        </div>
+        <img src="images/sunu-info/accueil.jpg" alt="Page d'accueil de Sunu Info : « Beaucoup de chemins. Un seul à choisir. » avec une barre de recherche" width="1600" height="867" decoding="async">
+      </figure>
+    </div>
+
+    <!-- ===== CHIFFRES ===== -->
+    <section class="section section--serree">
+      <div class="conteneur">
+        <ul class="cas__chiffres revele">
+          <li class="verre"><strong class="degrade" data-compteur="41">41</strong><span>pages</span></li>
+          <li class="verre"><strong class="degrade" data-compteur="14">14</strong><span>fiches filières</span></li>
+          <li class="verre"><strong class="degrade" data-compteur="35">35</strong><span>établissements</span></li>
+          <li class="verre"><strong class="degrade" data-compteur="10">10</strong><span>questions au test d'orientation</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== LE PROBLÈME ===== -->
+    <section class="section section--serree">
+      <div class="conteneur cas__bloc revele">
+        <div class="cas__titre">
+          <p class="cas__numero">01</p>
+          <h2>Le problème</h2>
+        </div>
+        <div class="cas__texte">
+          <p>
+            Après le bac, beaucoup d'élèves sénégalais ne savent pas vers quoi s'orienter. Les informations
+            existent, mais elles sont <strong>dispersées</strong> : sites d'universités, réseaux sociaux,
+            bouche-à-oreille. Comparer les filières, connaître les conditions d'admission ou les dates
+            limites demande de chercher partout.
+          </p>
+          <p>
+            Je voulais un endroit unique, <strong>gratuit</strong> et <strong>consultable sans créer de compte</strong>,
+            qui réponde aux vraies questions d'un nouveau bachelier.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LA SOLUTION ===== -->
+    <section class="section section--serree">
+      <div class="conteneur">
+        <div class="cas__bloc revele">
+          <div class="cas__titre">
+            <p class="cas__numero">02</p>
+            <h2>La solution</h2>
+          </div>
+          <div class="cas__texte">
+            <p>
+              Sunu Info rassemble tout le parcours après le bac : découvrir les filières, savoir lesquelles
+              correspondent à son profil, trouver l'école, puis préparer son inscription.
+            </p>
+          </div>
+        </div>
+
+        <div class="cas__fonctions">
+          <article class="fonction verre lumiere revele">
+            <span class="fonction__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h10"/></svg></span>
+            <h3>14 fiches filières</h3>
+            <p>Compétences, débouchés, écoles, plateformes de cours et documents, réunis sur une seule page par filière.</p>
+          </article>
+          <article class="fonction verre lumiere revele">
+            <span class="fonction__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></svg></span>
+            <h3>Test d'orientation</h3>
+            <p>10 questions pour découvrir les filières adaptées à son profil, ses intérêts et ses ambitions.</p>
+          </article>
+          <article class="fonction verre lumiere revele">
+            <span class="fonction__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10 12 5l9 5-9 5-9-5z"/><path d="M7 12v4c0 1.5 2.2 3 5 3s5-1.5 5-3v-4"/></svg></span>
+            <h3>Guides pratiques</h3>
+            <p>Campusen, système LMD, séries du bac, bourse nationale, logement étudiant, ISEP et classes préparatoires.</p>
+          </article>
+          <article class="fonction verre lumiere revele">
+            <span class="fonction__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+            <h3>Dates et outils</h3>
+            <p>Calendrier académique, concours, calculateur de moyenne et recherche sur tout le site.</p>
+          </article>
+          <article class="fonction verre lumiere revele">
+            <span class="fonction__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span>
+            <h3>Espace personnel</h3>
+            <p>Un compte facultatif pour enregistrer ses filières favorites, et un panneau d'administration pour gérer le contenu.</p>
+          </article>
+          <article class="fonction verre lumiere revele">
+            <span class="fonction__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-4.2A8.5 8.5 0 1 1 20 11.5z"/></svg></span>
+            <h3>Assistant</h3>
+            <p>Un assistant qui répond aux questions fréquentes par mots-clés et renvoie vers les bonnes pages.</p>
+          </article>
+        </div>
+
+        <figure class="navigateur revele">
+          <div class="navigateur__barre" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <em>portail-sunu-info.vercel.app/filiere-dev.html</em>
+          </div>
+          <img src="images/sunu-info/fiche-filiere.jpg" alt="Fiche de la filière Développement et génie logiciel : compétences clés, débouchés et écoles" width="1600" height="848" loading="lazy" decoding="async">
+          <figcaption>Une fiche filière : compétences, débouchés, écoles, plateformes et documents au même endroit.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== CHOIX TECHNIQUES ===== -->
+    <section class="section section--serree">
+      <div class="conteneur cas__mobile">
+        <div class="revele">
+          <div class="cas__titre">
+            <p class="cas__numero">03</p>
+            <h2>Mes choix techniques</h2>
+          </div>
+          <ul class="cas__choix">
+            <li>
+              <strong>HTML, CSS et JavaScript, sans framework.</strong>
+              Des pages légères qui se chargent vite, même avec une connexion mobile moyenne.
+            </li>
+            <li>
+              <strong>Pensé d'abord pour le téléphone.</strong>
+              La plupart des bacheliers consultent le site sur mobile : menu en tiroir, boutons larges, textes lisibles.
+            </li>
+            <li>
+              <strong>Supabase pour les comptes.</strong>
+              Connexion, profil et favoris, sans avoir à gérer moi-même un serveur de base de données.
+            </li>
+            <li>
+              <strong>Vercel + GitHub pour la mise en ligne.</strong>
+              Chaque modification envoyée sur GitHub est publiée automatiquement.
+            </li>
+            <li>
+              <strong>Respect de la vie privée.</strong>
+              Sans compte, la filière choisie et les favoris restent dans le navigateur du visiteur.
+            </li>
+          </ul>
+        </div>
+        <figure class="telephone revele">
+          <img src="images/sunu-info/mobile.jpg" alt="Accueil de Sunu Info sur téléphone" width="600" height="1231" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== APPRENTISSAGES ===== -->
+    <section class="section section--serree">
+      <div class="conteneur cas__bloc revele">
+        <div class="cas__titre">
+          <p class="cas__numero">04</p>
+          <h2>Ce que j'ai appris</h2>
+        </div>
+        <div class="cas__texte">
+          <p>
+            <strong>Travailler proprement avec Git.</strong> Un jour, j'ai modifié une ancienne copie du site
+            sans récupérer les dernières versions, et j'ai cassé la version en ligne. Depuis, je récupère
+            toujours les derniers changements avant de travailler, et je sais revenir en arrière.
+          </p>
+          <p>
+            <strong>Changer d'hébergeur.</strong> Le site était d'abord sur Netlify. Je l'ai déplacé vers Vercel
+            en adaptant les fonctions côté serveur, sans interrompre le service.
+          </p>
+          <p>
+            <strong>Penser à l'utilisateur.</strong> Le plus difficile n'était pas le code, mais d'organiser
+            beaucoup d'informations pour qu'un élève trouve sa réponse en quelques clics.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== APPEL À L'ACTION ===== -->
+    <section class="section">
+      <div class="conteneur">
+        <div class="contact contact--centre revele">
+          <div class="contact__texte">
+            <h2>Un projet du même genre&nbsp;?</h2>
+            <p class="contact__intro">Je suis ouvert aux stages et aux projets freelance. Parlons-en.</p>
+            <div class="contact__boutons">
+              <a href="index.html#contact" class="btn btn--blanc">Me contacter</a>
+              <a href="https://portail-sunu-info.vercel.app" target="_blank" rel="noopener" class="btn btn--transparent">Visiter Sunu Info</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== PIED DE PAGE ===== -->
+  <footer class="pied">
+    <div class="conteneur">
+      <div class="pied__grille">
+        <div class="pied__marque">
+          <a href="index.html" class="logo">
+            <img class="logo__mark" src="images/ibrahima-sarr-portrait.jpg" alt="" width="40" height="40">
+            <span class="logo__texte"><span class="logo__nom">Ibrahima Sarr</span><span class="logo__role">Développeur web</span></span>
+          </a>
+          <p>Développeur web à Dakar. Je connecte le talent africain au monde, une interface à la fois.</p>
+        </div>
+        <div>
+          <p class="pied__titre">Navigation</p>
+          <ul class="pied__liens">
+            <li><a href="index.html#apropos">À propos</a></li>
+            <li><a href="index.html#competences">Compétences</a></li>
+            <li><a href="index.html#projets">Projet</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="pied__titre">Contact</p>
+          <ul class="pied__liens">
+            <li><a href="mailto:ibzokg1408@gmail.com">ibzokg1408@gmail.com</a></li>
+            <li><a href="tel:+221762138445">+221 76 213 84 45</a></li>
+            <li>Dakar, Sénégal</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pied__bas">
+        <p>© <span id="annee">2026</span> Ibrahima SARR. Tous droits réservés.</p>
+        <p>Conçu et codé avec HTML, CSS &amp; JavaScript</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#haut-de-page" class="haut" id="haut" aria-label="Retour en haut">
+    <svg class="haut__anneau" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22"/><circle class="haut__progres" id="haut-progres" cx="24" cy="24" r="22"/></svg>
+    <svg class="haut__fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+  </a>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -369,14 +369,14 @@ svg.plein { fill: currentColor !important; stroke: none !important; }
   display: grid; place-items: center; border-radius: 16px; overflow: hidden;
   background: #f2f0ec;
 }
-.projet__image img { width: 100%; height: 100%; object-fit: contain; transition: transform .6s; }
+.projet__image img { width: 100%; height: 100%; object-fit: cover; object-position: 0 0; transition: transform .6s; }
 .projet:hover .projet__image img { transform: scale(1.03); }
 .projet__corps { padding: 26px 28px; display: flex; flex-direction: column; gap: 16px; justify-content: center; align-items: flex-start; }
 .projet__etiquette { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #16a34a; }
 :root[data-theme="dark"] .projet__etiquette { color: #86efac; }
 .projet h3 { font-size: 36px; }
 .projet__corps > p:not(.projet__etiquette) { color: var(--texte-doux); }
-.projet__btn { margin-top: 6px; }
+.projet__boutons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
 
 /* Contact : grand bloc en dégradé, texte à gauche, coordonnées à droite */
 .contact {
@@ -577,7 +577,7 @@ a.coord__valeur:hover { text-decoration: underline; text-underline-offset: 3px; 
 
   .contact { padding: 44px 14px 14px; border-radius: 26px; }
   .contact__texte { padding: 0 6px; }
-  .hero__boutons .btn, .contact__boutons .btn { flex: 1 1 auto; }
+  .hero__boutons .btn, .contact__boutons .btn, .projet__boutons .btn { flex: 1 1 auto; }
   .defiler { display: none; }
   .coord { padding: 10px; gap: 10px; border-radius: 18px; }
   .coord:hover { transform: none; }
@@ -593,4 +593,119 @@ a.coord__valeur:hover { text-decoration: underline; text-underline-offset: 3px; 
 /* ----- Très petits écrans ----- */
 @media (max-width: 360px) {
   .logo__texte { display: none; }
+}
+
+/* =========================================================
+   Page « étude de cas » (sunu-info.html)
+   ========================================================= */
+.cas__intro { padding: 132px 0 48px; }
+.cas__retour {
+  display: flex; width: fit-content; align-items: center; gap: 8px; margin-bottom: 28px;
+  font-size: 14.5px; font-weight: 600; color: var(--texte-doux); text-decoration: none;
+  transition: color .2s, gap .2s;
+}
+.cas__retour:hover { color: var(--violet); gap: 12px; }
+.cas__retour svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cas__intro h1 { font-size: clamp(48px, 8vw, 96px); }
+.cas__accroche { font-size: clamp(18px, 2vw, 22px); color: var(--texte-doux); max-width: 720px; margin-top: 18px; }
+
+.cas__fiche {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 40px 0 0; padding: 0; overflow: hidden;
+}
+.cas__fiche div { padding: 20px 24px; border-right: 1px solid color-mix(in srgb, var(--texte) 8%, transparent); }
+.cas__fiche div:last-child { border-right: 0; }
+.cas__fiche dt { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--texte-doux); }
+.cas__fiche dd { margin: 6px 0 0; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.cas__boutons { margin-top: 28px; }
+
+/* Capture dans un faux navigateur */
+.navigateur {
+  margin: 0; border-radius: 18px; overflow: hidden;
+  background: var(--fond); border: 1px solid color-mix(in srgb, var(--texte) 10%, transparent);
+  box-shadow: var(--ombre-forte);
+}
+.navigateur__barre {
+  display: flex; align-items: center; gap: 7px; padding: 12px 16px;
+  border-bottom: 1px solid color-mix(in srgb, var(--texte) 8%, transparent);
+  background: color-mix(in srgb, var(--fond) 70%, #fff);
+}
+:root[data-theme="dark"] .navigateur__barre { background: color-mix(in srgb, var(--fond) 88%, #fff); }
+.navigateur__barre span { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+.navigateur__barre span:nth-child(2) { background: #febc2e; }
+.navigateur__barre span:nth-child(3) { background: #28c840; }
+.navigateur__barre em {
+  margin-left: 12px; padding: 4px 14px; border-radius: 999px; font-style: normal; font-size: 12.5px;
+  color: var(--texte-doux); background: var(--puce); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.navigateur img { width: 100%; height: auto; }
+.navigateur figcaption { padding: 14px 18px; font-size: 14.5px; color: var(--texte-doux); border-top: 1px solid color-mix(in srgb, var(--texte) 8%, transparent); }
+
+.section--serree { padding: 64px 0; }
+
+.cas__chiffres { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.cas__chiffres li { padding: 24px; display: flex; flex-direction: column; gap: 4px; }
+.cas__chiffres strong { font-size: 44px; font-weight: 800; line-height: 1; }
+.cas__chiffres span { color: var(--texte-doux); font-weight: 600; font-size: 15px; }
+
+/* Bloc texte : titre numéroté à gauche, texte à droite */
+.cas__bloc { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; align-items: start; }
+.cas__numero { font-size: 14px; font-weight: 800; color: var(--violet); letter-spacing: .1em; margin-bottom: 8px; }
+.cas h2 { font-size: clamp(28px, 3.6vw, 40px); }
+.cas__texte p { font-size: 18px; color: var(--texte-doux); }
+.cas__texte p + p { margin-top: 16px; }
+.cas__texte strong { color: var(--texte); }
+
+.cas__fonctions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 40px 0; }
+.fonction { padding: 26px; }
+.fonction__ico {
+  width: 46px; height: 46px; border-radius: 14px; margin-bottom: 18px;
+  display: grid; place-items: center; background: var(--degrade);
+  box-shadow: 0 10px 20px -8px rgba(124, 58, 237, .55);
+}
+.fonction__ico svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.fonction h3 { font-size: 19px; margin-bottom: 8px; }
+.fonction p { color: var(--texte-doux); font-size: 15.5px; }
+
+/* Choix techniques + capture téléphone */
+.cas__mobile { display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; align-items: center; }
+.cas__choix { list-style: none; padding: 0; margin-top: 28px; display: grid; gap: 18px; }
+.cas__choix li { position: relative; padding-left: 34px; color: var(--texte-doux); font-size: 16.5px; }
+.cas__choix li::before {
+  content: ""; position: absolute; left: 0; top: 3px; width: 22px; height: 22px; border-radius: 7px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center / 14px no-repeat, var(--degrade);
+}
+.cas__choix strong { display: block; color: var(--texte); margin-bottom: 2px; }
+.telephone {
+  margin: 0 auto; width: 100%; max-width: 300px; padding: 10px; border-radius: 40px;
+  background: #16122b; box-shadow: var(--ombre-forte);
+}
+.telephone img { width: 100%; height: auto; border-radius: 30px; }
+
+.contact--centre { grid-template-columns: 1fr; text-align: center; }
+.contact--centre .contact__intro { margin-inline: auto; }
+.contact--centre .contact__boutons { justify-content: center; }
+
+@media (max-width: 960px) {
+  .cas__fiche { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cas__fiche div:nth-child(2) { border-right: 0; }
+  .cas__fiche div:nth-child(-n+2) { border-bottom: 1px solid color-mix(in srgb, var(--texte) 8%, transparent); }
+  .cas__chiffres { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cas__bloc { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .cas__fonctions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cas__mobile { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+}
+@media (max-width: 760px) {
+  .cas__intro { padding: 104px 0 32px; }
+  .cas__fiche div { padding: 16px; }
+  .cas__chiffres { gap: 10px; }
+  .cas__chiffres li { padding: 18px 16px; }
+  .cas__chiffres strong { font-size: 34px; }
+  .cas__chiffres span { font-size: 13.5px; }
+  .cas__fonctions { grid-template-columns: minmax(0, 1fr); }
+  .cas__texte p { font-size: 16.5px; }
+  .navigateur { border-radius: 14px; }
+  .navigateur__barre em { font-size: 11px; }
+  .telephone { max-width: 240px; }
+  .section--serree { padding: 44px 0; }
 }
