@@ -1,17 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Logo Ibrahima Sarr">
   <defs>
-    <linearGradient id="logo-degrade" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#7c3aed"/>
+    <linearGradient id="logo-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8b5cf6"/>
       <stop offset="1" stop-color="#3b82f6"/>
     </linearGradient>
   </defs>
-  <!-- Fond : carré arrondi en dégradé -->
-  <rect width="48" height="48" rx="14" fill="url(#logo-degrade)"/>
-  <!-- Monogramme « is » -->
-  <g fill="none" stroke="#fff" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M14.5 21.5v13"/>
-    <path d="M33.6 22.6c-1.3-1.6-3.3-2.6-5.6-2.6-3 0-5.2 1.6-5.2 3.8 0 5.3 11.2 2.6 11.2 8.2 0 2.4-2.3 4.1-5.7 4.1-2.5 0-4.7-1-6-2.8"/>
-  </g>
-  <!-- Point du « i » en rose -->
-  <circle cx="14.5" cy="13.6" r="3" fill="#f9a8d4"/>
+  <!-- Fond : carré arrondi encre -->
+  <rect width="48" height="48" rx="12" fill="#16122b"/>
+  <!-- Monogramme « IS » -->
+  <rect x="13" y="12.5" width="4.4" height="21" rx="1" fill="#fff"/>
+  <path d="M34.2 16.6c-1.4-2.1-3.6-3.3-6.3-3.3-3.6 0-6 2-6 4.8 0 6.7 12.6 3.3 12.6 10.3 0 3.1-2.7 5.3-6.6 5.3-2.8 0-5.4-1.2-6.9-3.5"
+        fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Trait d'accent en dégradé -->
+  <rect x="13" y="37.5" width="21.6" height="2.6" rx="1.3" fill="url(#logo-accent)"/>
 </svg>
