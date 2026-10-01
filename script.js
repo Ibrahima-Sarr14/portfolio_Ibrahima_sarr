@@ -92,5 +92,90 @@ const obsSections = new IntersectionObserver(entrees => {
 }, { rootMargin: '-45% 0px -50% 0px' });
 sections.forEach(s => s && obsSections.observe(s));
 
+const mouvementReduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ----- Barre de lecture + bouton retour en haut -----
+const progression = document.getElementById('progression');
+const haut = document.getElementById('haut');
+const hautProgres = document.getElementById('haut-progres');
+const PERIMETRE = 2 * Math.PI * 22; // cercle de rayon 22
+
+function majDefilement() {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const ratio = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+  progression.style.transform = `scaleX(${ratio})`;
+  hautProgres.style.strokeDashoffset = PERIMETRE * (1 - ratio);
+  haut.classList.toggle('visible', window.scrollY > 600);
+}
+window.addEventListener('scroll', majDefilement, { passive: true });
+window.addEventListener('resize', majDefilement);
+majDefilement();
+
+// ----- Effet machine à écrire dans l'accueil -----
+const machine = document.getElementById('machine');
+const mots = ['interfaces modernes', 'sites responsives', 'expériences fluides', 'solutions web utiles'];
+if (machine && !mouvementReduit) {
+  let indexMot = 0, lettres = mots[0].length, efface = false;
+  (function taper() {
+    const mot = mots[indexMot];
+    lettres += efface ? -1 : 1;
+    machine.textContent = mot.slice(0, lettres);
+    let delai = efface ? 40 : 85;
+    if (!efface && lettres === mot.length) { efface = true; delai = 1800; }
+    else if (efface && lettres === 0) { efface = false; indexMot = (indexMot + 1) % mots.length; delai = 300; }
+    setTimeout(taper, delai);
+  })();
+}
+
+// ----- Compteurs animés (14, 35, 100 %) -----
+const compteurs = document.querySelectorAll('[data-compteur]');
+if ('IntersectionObserver' in window && !mouvementReduit) {
+  const obsCompteurs = new IntersectionObserver(entrees => {
+    entrees.forEach(entree => {
+      if (!entree.isIntersecting) return;
+      const el = entree.target;
+      const fin = +el.dataset.compteur;
+      const suffixe = el.dataset.suffixe || '';
+      const debut = performance.now();
+      (function etape(t) {
+        const p = Math.min((t - debut) / 1400, 1);
+        el.textContent = Math.round(fin * (1 - Math.pow(1 - p, 3))) + suffixe;
+        if (p < 1) requestAnimationFrame(etape);
+      })(debut);
+      obsCompteurs.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+  compteurs.forEach(c => obsCompteurs.observe(c));
+}
+
+// ----- Halo lumineux qui suit la souris sur les cartes -----
+document.querySelectorAll('.lumiere').forEach(carte => {
+  carte.addEventListener('pointermove', e => {
+    const r = carte.getBoundingClientRect();
+    carte.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    carte.style.setProperty('--my', `${e.clientY - r.top}px`);
+  });
+});
+
+// ----- Copier l'e-mail ou le téléphone -----
+const toast = document.getElementById('toast');
+let minuteurToast;
+function afficherToast(message) {
+  toast.textContent = message;
+  toast.classList.add('visible');
+  clearTimeout(minuteurToast);
+  minuteurToast = setTimeout(() => toast.classList.remove('visible'), 2000);
+}
+document.querySelectorAll('[data-copier]').forEach(bouton => {
+  bouton.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(bouton.dataset.copier);
+      afficherToast('Copié ✓ ' + bouton.dataset.copier);
+    } catch (e) {
+      afficherToast(bouton.dataset.copier);
+    }
+  });
+});
+
 // ----- Année du pied de page -----
 document.getElementById('annee').textContent = new Date().getFullYear();
