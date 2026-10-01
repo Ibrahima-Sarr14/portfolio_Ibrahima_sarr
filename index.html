@@ -7,10 +7,10 @@
   <meta name="description" content="Portfolio d'Ibrahima SARR, étudiant en informatique et développeur web : HTML, CSS, Bootstrap et JavaScript.">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 
-  <!-- Polices : Space Grotesk (titres) + Inter (texte) -->
+  <!-- Police : Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 
@@ -24,18 +24,27 @@
 </head>
 <body>
 
+  <!-- Taches de couleur floues en arrière-plan -->
+  <div class="fond-deco" aria-hidden="true">
+    <span class="tache tache--1"></span>
+    <span class="tache tache--2"></span>
+    <span class="tache tache--3"></span>
+  </div>
+
   <!-- ===== EN-TÊTE ===== -->
   <header class="entete" id="entete">
-    <div class="conteneur entete__inner">
+    <div class="conteneur entete__barre">
       <a href="#accueil" class="logo" aria-label="Retour en haut">
         <span class="logo__mark">IS</span>
-        <span class="logo__nom">Ibrahima SARR</span>
+        <span class="logo__nom">Ibrahima Sarr</span>
       </a>
 
       <nav class="nav" id="nav" aria-label="Navigation principale">
+        <span class="nav__pilule" aria-hidden="true"></span>
+        <a href="#accueil">Accueil</a>
         <a href="#apropos">À propos</a>
         <a href="#competences">Compétences</a>
-        <a href="#projets">Projets</a>
+        <a href="#projets">Projet</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -57,96 +66,108 @@
     <section class="hero" id="accueil">
       <div class="conteneur hero__grille">
         <div class="hero__texte">
-          <p class="badge"><span class="point"></span> Ouvert aux stages et projets freelance</p>
-          <h1>Ibrahima <span class="accent">SARR</span></h1>
+          <p class="pastille"><span class="point"></span> Ouvert aux stages et projets freelance</p>
+          <h1>Salut, je suis <span class="degrade">Ibrahima</span> <span class="main" aria-hidden="true">👋</span></h1>
           <p class="hero__titre">Étudiant en informatique &amp; développeur web</p>
           <p class="hero__intro">
             Je conçois des interfaces modernes et des expériences utilisateur fluides.
             Mon objectif&nbsp;: connecter le talent africain au monde grâce à des solutions web innovantes.
           </p>
           <div class="hero__boutons">
-            <a href="#projets" class="btn btn--plein">Voir mes projets</a>
-            <a href="#contact" class="btn btn--contour">Me contacter</a>
+            <a href="#projets" class="btn btn--plein">Voir mon projet</a>
+            <a href="#contact" class="btn btn--verre">Me contacter</a>
           </div>
         </div>
 
-        <!-- Carte « code » décorative -->
-        <div class="code-carte" aria-hidden="true">
-          <div class="code-carte__barre">
-            <span></span><span></span><span></span>
-            <em>ibrahima.js</em>
+        <!-- Carte profil -->
+        <aside class="profil verre" aria-label="Résumé">
+          <div class="profil__tete">
+            <span class="profil__avatar">IS</span>
+            <div>
+              <p class="profil__nom">Ibrahima SARR</p>
+              <p class="profil__role">Développeur web</p>
+            </div>
           </div>
-<pre><code><span class="k">const</span> <span class="v">developpeur</span> = {
-  <span class="p">nom</span>: <span class="s">"Ibrahima SARR"</span>,
-  <span class="p">role</span>: <span class="s">"Développeur web"</span>,
-  <span class="p">stack</span>: [<span class="s">"HTML"</span>, <span class="s">"CSS"</span>,
-          <span class="s">"Bootstrap"</span>, <span class="s">"JavaScript"</span>],
-  <span class="p">mission</span>: <span class="s">"Connecter le talent</span>
-<span class="s">            africain au monde"</span>,
-  <span class="p">disponible</span>: <span class="k">true</span>
-};<span class="curseur"></span></code></pre>
-        </div>
+          <p class="profil__label">Ma stack</p>
+          <ul class="puces">
+            <li>HTML</li><li>CSS</li><li>Bootstrap</li><li>JavaScript</li>
+          </ul>
+          <div class="profil__dispo">
+            <span class="point"></span>
+            Disponible pour de nouveaux projets
+          </div>
+          <span class="profil__flottant profil__flottant--1">✦ Responsive</span>
+          <span class="profil__flottant profil__flottant--2">⚡ Rapide</span>
+        </aside>
       </div>
     </section>
 
     <!-- ===== À PROPOS ===== -->
     <section class="section" id="apropos">
-      <div class="conteneur apropos">
+      <div class="conteneur">
         <div class="section__tete revele">
-          <p class="surtitre">01 · À propos</p>
+          <p class="surtitre">À propos</p>
           <h2>Un développeur qui pense d'abord à l'utilisateur</h2>
         </div>
-        <div class="apropos__texte revele">
-          <p>
-            Développeur web passionné, je transforme des idées en sites clairs, rapides et agréables à utiliser,
-            sur ordinateur comme sur téléphone. J'accorde autant d'importance au design qu'au code&nbsp;:
-            une interface réussie est une interface qu'on comprend sans réfléchir.
-          </p>
-          <p>
-            Étudiant en informatique, j'ai conçu et développé moi-même <strong>Sunu Info</strong>,
-            un portail d'orientation pour les bacheliers sénégalais, aujourd'hui en ligne.
-          </p>
+        <div class="apropos revele">
+          <div class="apropos__texte verre">
+            <p>
+              Développeur web passionné, je transforme des idées en sites clairs, rapides et agréables à utiliser,
+              sur ordinateur comme sur téléphone. J'accorde autant d'importance au design qu'au code&nbsp;:
+              une interface réussie est une interface qu'on comprend sans réfléchir.
+            </p>
+            <p>
+              Étudiant en informatique, j'ai conçu et développé moi-même <strong>Sunu Info</strong>,
+              un portail d'orientation pour les bacheliers sénégalais, aujourd'hui en ligne.
+            </p>
+          </div>
           <ul class="chiffres">
-            <li><strong>14</strong><span>filières présentées</span></li>
-            <li><strong>35</strong><span>établissements référencés</span></li>
-            <li><strong>100%</strong><span>responsive</span></li>
+            <li class="verre"><strong class="degrade">14</strong><span>filières présentées</span></li>
+            <li class="verre"><strong class="degrade">35</strong><span>établissements référencés</span></li>
+            <li class="verre"><strong class="degrade">100%</strong><span>responsive</span></li>
           </ul>
         </div>
       </div>
     </section>
 
     <!-- ===== COMPÉTENCES ===== -->
-    <section class="section section--alt" id="competences">
+    <section class="section" id="competences">
       <div class="conteneur">
         <div class="section__tete revele">
-          <p class="surtitre">02 · Compétences</p>
+          <p class="surtitre">Compétences</p>
           <h2>Mes outils de travail</h2>
         </div>
 
         <div class="competences">
-          <article class="comp-carte revele">
-            <div class="comp-carte__ico">&lt;/&gt;</div>
+          <article class="comp-carte verre revele">
+            <div class="comp-carte__ico">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>
+            </div>
             <h3>Front-end</h3>
             <p>Des pages structurées, accessibles et animées avec soin.</p>
-            <ul class="tags">
+            <ul class="puces">
               <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Bootstrap</li>
             </ul>
           </article>
 
-          <article class="comp-carte revele">
-            <div class="comp-carte__ico">◐</div>
+          <article class="comp-carte verre revele">
+            <div class="comp-carte__ico">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+            </div>
             <h3>Design &amp; UX</h3>
             <p>Des interfaces lisibles qui s'adaptent à tous les écrans.</p>
-            <ul class="tags">
-              <li>Responsive design</li><li>Flexbox &amp; Grid</li><li>Mode sombre</li><li>Animations</li>
+            <ul class="puces">
+              <li>Responsive</li><li>Flexbox &amp; Grid</li><li>Mode sombre</li><li>Animations</li>
             </ul>
           </article>
 
-          <article class="comp-carte revele">
-            <div class="comp-carte__ico">⇪</div>
+          <article class="comp-carte verre revele">
+            <div class="comp-carte__ico">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
+            </div>
             <h3>Outils</h3>
             <p>Versionner, collaborer et mettre un site en ligne.</p>
-            <ul class="tags">
+            <ul class="puces">
               <li>Git</li><li>GitHub</li><li>Vercel</li><li>VS Code</li>
             </ul>
           </article>
@@ -154,56 +175,53 @@
       </div>
     </section>
 
-    <!-- ===== PROJETS ===== -->
+    <!-- ===== PROJET ===== -->
     <section class="section" id="projets">
       <div class="conteneur">
         <div class="section__tete revele">
-          <p class="surtitre">03 · Projets</p>
+          <p class="surtitre">Projet</p>
           <h2>Mon projet phare</h2>
         </div>
 
-        <div class="projets">
-
-          <!-- Projet 1 : Sunu Info -->
-          <article class="projet projet--vedette revele">
-            <a class="projet__image" href="https://portail-sunu-info.vercel.app" target="_blank" rel="noopener">
-              <img src="images/sunu-info.png" alt="Page d'accueil de Sunu Info" loading="lazy">
+        <article class="projet verre revele">
+          <a class="projet__image" href="https://portail-sunu-info.vercel.app" target="_blank" rel="noopener">
+            <img src="images/sunu-info.png" alt="Page d'accueil de Sunu Info" loading="lazy">
+          </a>
+          <div class="projet__corps">
+            <p class="projet__etiquette"><span class="point"></span> En ligne</p>
+            <h3>Sunu Info</h3>
+            <p>
+              Portail d'orientation après le bac au Sénégal&nbsp;: 14 filières et 35 établissements présentés,
+              recherche, espace personnel pour enregistrer ses choix et panneau d'administration.
+            </p>
+            <ul class="puces">
+              <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Supabase</li><li>Vercel</li>
+            </ul>
+            <a href="https://portail-sunu-info.vercel.app" target="_blank" rel="noopener" class="btn btn--plein projet__btn">
+              Voir le site
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
             </a>
-            <div class="projet__corps">
-              <p class="projet__etiquette">En ligne</p>
-              <h3>Sunu Info</h3>
-              <p>
-                Portail d'orientation après le bac au Sénégal&nbsp;: 14 filières et 35 établissements présentés,
-                recherche, espace personnel pour enregistrer ses choix et panneau d'administration.
-              </p>
-              <ul class="tags">
-                <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Supabase</li><li>Vercel</li>
-              </ul>
-              <div class="projet__liens">
-                <a href="https://portail-sunu-info.vercel.app" target="_blank" rel="noopener" class="lien-fleche">Voir le site</a>
-              </div>
-            </div>
-          </article>
-
-        </div>
+          </div>
+        </article>
       </div>
     </section>
 
     <!-- ===== CONTACT ===== -->
-    <section class="section section--alt" id="contact">
-      <div class="conteneur contact revele">
-        <p class="surtitre">04 · Contact</p>
-        <h2>Travaillons ensemble</h2>
-        <p class="contact__intro">
-          Un stage, un projet de site web ou simplement une question&nbsp;? Écrivez-moi, je réponds rapidement.
-        </p>
-        <div class="contact__boutons">
-          <!-- À COMPLÉTER : remplace l'adresse ci-dessous par ton e-mail -->
-          <a href="mailto:ton-email@exemple.com" class="btn btn--plein">M'écrire un e-mail</a>
-          <a href="https://github.com/Ibrahima-Sarr14" target="_blank" rel="noopener" class="btn btn--contour">
-            <svg viewBox="0 0 24 24" aria-hidden="true" class="ico-github"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
-            GitHub
-          </a>
+    <section class="section" id="contact">
+      <div class="conteneur">
+        <div class="contact revele">
+          <h2>Travaillons ensemble&nbsp;✨</h2>
+          <p class="contact__intro">
+            Un stage, un projet de site web ou simplement une question&nbsp;? Écrivez-moi, je réponds rapidement.
+          </p>
+          <div class="contact__boutons">
+            <!-- À COMPLÉTER : remplace l'adresse ci-dessous par ton e-mail -->
+            <a href="mailto:ton-email@exemple.com" class="btn btn--blanc">M'écrire un e-mail</a>
+            <a href="https://github.com/Ibrahima-Sarr14" target="_blank" rel="noopener" class="btn btn--transparent">
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="ico-github"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+              GitHub
+            </a>
+          </div>
         </div>
       </div>
     </section>

@@ -7,9 +7,7 @@ const racine = document.documentElement;
 const btnTheme = document.getElementById('btn-theme');
 
 function themeActuel() {
-  const choisi = racine.getAttribute('data-theme');
-  if (choisi) return choisi;
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  return racine.getAttribute('data-theme') || 'light';
 }
 
 btnTheme.addEventListener('click', () => {
@@ -58,14 +56,38 @@ if ('IntersectionObserver' in window) {
   blocs.forEach(bloc => bloc.classList.add('visible'));
 }
 
+// ----- Pastille du menu (comme sur Sunu Info) -----
+// Sur ordinateur, une pastille foncée se place sous le lien de la section
+// visible et glisse vers le lien survolé.
+const liens = [...nav.querySelectorAll('a')];
+const pilule = nav.querySelector('.nav__pilule');
+const bureau = window.matchMedia('(min-width: 901px)');
+let lienActif = null;
+
+function placerPilule(cible) {
+  liens.forEach(l => l.classList.toggle('sous-pilule', l === cible));
+  if (!bureau.matches || !cible) { pilule.style.opacity = 0; return; }
+  pilule.style.width = cible.offsetWidth + 'px';
+  pilule.style.transform = `translateX(${cible.offsetLeft}px)`;
+  pilule.style.opacity = 1;
+}
+
+liens.forEach(lien => {
+  lien.addEventListener('mouseenter', () => placerPilule(lien));
+  lien.addEventListener('focus', () => placerPilule(lien));
+});
+nav.addEventListener('mouseleave', () => placerPilule(lienActif));
+window.addEventListener('resize', () => placerPilule(lienActif));
+if (document.fonts) document.fonts.ready.then(() => placerPilule(lienActif));
+
 // ----- Lien du menu actif selon la section visible -----
-const liens = nav.querySelectorAll('a');
-const sections = [...liens].map(l => document.querySelector(l.getAttribute('href')));
+const sections = liens.map(l => document.querySelector(l.getAttribute('href')));
 const obsSections = new IntersectionObserver(entrees => {
   entrees.forEach(entree => {
-    if (entree.isIntersecting) {
-      liens.forEach(l => l.classList.toggle('actif', l.getAttribute('href') === '#' + entree.target.id));
-    }
+    if (!entree.isIntersecting) return;
+    lienActif = liens.find(l => l.getAttribute('href') === '#' + entree.target.id) || null;
+    liens.forEach(l => l.classList.toggle('actif', l === lienActif));
+    if (!nav.matches(':hover')) placerPilule(lienActif);
   });
 }, { rootMargin: '-45% 0px -50% 0px' });
 sections.forEach(s => s && obsSections.observe(s));
