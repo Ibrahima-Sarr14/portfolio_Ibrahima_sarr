@@ -147,11 +147,13 @@ ul { margin: 0; }
   text-decoration: none; font-weight: 800; font-size: 17px;
   text-transform: uppercase; letter-spacing: -0.01em; white-space: nowrap;
 }
+/* Logo personnel (images/logo.svg) */
 .logo__mark {
-  width: 36px; height: 36px; border-radius: 50%;
-  display: grid; place-items: center;
-  background: var(--degrade); color: #fff; font-size: 13px; font-weight: 800;
+  width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+  box-shadow: 0 8px 18px -8px rgba(124, 58, 237, .65);
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1);
 }
+.logo:hover .logo__mark { transform: rotate(-8deg) scale(1.05); }
 
 /* Bureau : pilule bordée */
 .nav {
@@ -246,6 +248,7 @@ ul { margin: 0; }
   width: 68px; height: 68px; border-radius: 22px; flex-shrink: 0;
   display: grid; place-items: center;
   background: var(--degrade); color: #fff; font-weight: 800; font-size: 22px;
+  object-fit: cover; border: 3px solid #fff; outline: 2px solid var(--violet);
   box-shadow: 0 12px 24px -10px rgba(124, 58, 237, .6);
 }
 .profil__nom { font-weight: 800; font-size: 20px; }
@@ -298,7 +301,37 @@ svg.plein { fill: currentColor !important; stroke: none !important; }
 .section h2 { font-size: clamp(30px, 4.4vw, 46px); }
 
 /* À propos */
-.apropos { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; }
+/* Photo à gauche (sur deux lignes), texte puis chiffres à droite */
+.apropos {
+  display: grid; grid-template-columns: .9fr 1.4fr; gap: 20px;
+  grid-template-areas: "photo texte" "photo chiffres";
+}
+.apropos__photo { grid-area: photo; position: relative; margin: 0; }
+.apropos__texte { grid-area: texte; }
+.apropos .chiffres { grid-area: chiffres; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.apropos .chiffres li { flex-direction: column; align-items: flex-start; gap: 6px; }
+.apropos .chiffres strong { min-width: 0; }
+
+/* Cadre en dégradé autour de la photo */
+.apropos__cadre {
+  height: 100%; padding: 6px; border-radius: 28px;
+  background: linear-gradient(140deg, var(--violet), var(--bleu) 55%, var(--rose));
+  box-shadow: var(--ombre-forte);
+}
+.apropos__cadre img {
+  width: 100%; height: 100%; min-height: 420px; object-fit: cover; object-position: 50% 15%;
+  border-radius: 22px; display: block;
+}
+.apropos__badge {
+  position: absolute; display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border-radius: 999px;
+  background: var(--fond); border: 1px solid var(--verre-bord); box-shadow: var(--ombre-forte);
+  font-size: 14px; font-weight: 700; color: var(--texte);
+  animation: flotte 5s ease-in-out infinite;
+}
+.apropos__badge--1 { left: -14px; bottom: 64px; }
+.apropos__badge--2 { right: -12px; top: 28px; animation-delay: -2.5s; }
+.apropos__badge svg { width: 16px; height: 16px; fill: none; stroke: var(--violet); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .apropos__texte { padding: 36px; }
 .apropos__texte p { color: var(--texte-doux); font-size: 17.5px; }
 .apropos__texte p + p { margin-top: 16px; }
@@ -465,14 +498,16 @@ a.coord__valeur:hover { text-decoration: underline; text-underline-offset: 3px; 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .revele { opacity: 1; transform: none; transition: none; }
-  .main, .profil__flottant, .degrade--anime, .bandeau__piste, .defiler span, .machine__curseur { animation: none; }
+  .main, .profil__flottant, .apropos__badge, .degrade--anime, .bandeau__piste, .defiler span, .machine__curseur { animation: none; }
 }
 
 /* ----- Tablette ----- */
 @media (max-width: 960px) {
   .hero__grille { grid-template-columns: minmax(0, 1fr); gap: 56px; }
   .profil { max-width: 460px; }
-  .apropos { grid-template-columns: minmax(0, 1fr); }
+  .apropos { grid-template-columns: minmax(0, 1fr); grid-template-areas: "photo" "texte" "chiffres"; }
+  .apropos__photo { width: 100%; max-width: 400px; justify-self: center; margin-bottom: 12px; }
+  .apropos__cadre img { min-height: 0; aspect-ratio: 4 / 5; }
   .chiffres { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .chiffres li { flex-direction: column; align-items: flex-start; gap: 6px; }
   .chiffres strong { min-width: 0; }
@@ -521,6 +556,10 @@ a.coord__valeur:hover { text-decoration: underline; text-underline-offset: 3px; 
   .profil__flottant--2 { left: 10px; }
 
   .apropos__texte { padding: 26px; }
+  .apropos__photo { max-width: 320px; }
+  .apropos__badge { font-size: 13px; padding: 8px 13px; }
+  .apropos__badge--1 { left: -8px; }
+  .apropos__badge--2 { right: -8px; }
   .chiffres { gap: 10px; }
   .chiffres li { padding: 16px 14px; }
   .chiffres strong { font-size: 28px; }
