@@ -365,6 +365,10 @@ svg.plein { fill: currentColor !important; stroke: none !important; }
   transition: transform .3s, box-shadow .3s;
 }
 .projet:hover { transform: translateY(-4px); box-shadow: var(--ombre-forte); }
+/* Projets suivants : espacés, image à droite une fois sur deux */
+.projet + .projet { margin-top: 28px; }
+.projet--inverse .projet__image { order: 2; }
+@media (max-width: 960px) { .projet--inverse .projet__image { order: 0; } }
 .projet__image {
   display: grid; place-items: center; border-radius: 16px; overflow: hidden;
   background: #f2f0ec;

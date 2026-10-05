@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Dépenses — Gestionnaire de budget en FCFA</title>
+  <meta name="description" content="Suivez vos dépenses en francs CFA : budget mensuel, catégories, filtres et export. Projet d'Ibrahima SARR en HTML, CSS et JavaScript.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== EN-TÊTE ===== -->
+  <header class="entete">
+    <div class="conteneur entete__barre">
+      <div class="marque">
+        <span class="marque__logo" aria-hidden="true">₣</span>
+        <div>
+          <h1 class="marque__nom">Mes Dépenses</h1>
+          <p class="marque__sous">Ton budget en francs CFA</p>
+        </div>
+      </div>
+
+      <!-- Choix du mois affiché -->
+      <label class="mois">
+        <span class="visuellement-cache">Mois affiché</span>
+        <input type="month" id="choix-mois">
+      </label>
+    </div>
+  </header>
+
+  <main class="conteneur">
+
+    <!-- ===== RÉSUMÉ DU MOIS ===== -->
+    <section class="resume" aria-label="Résumé du mois">
+      <article class="carte stat">
+        <p class="stat__label">Dépensé ce mois</p>
+        <p class="stat__valeur" id="total-mois">0 FCFA</p>
+        <p class="stat__detail" id="nb-depenses">Aucune dépense</p>
+      </article>
+
+      <article class="carte stat">
+        <p class="stat__label">Reste du budget</p>
+        <p class="stat__valeur" id="reste-budget">—</p>
+        <!-- Barre de progression du budget -->
+        <div class="jauge" role="progressbar" aria-label="Budget utilisé" aria-valuemin="0" aria-valuemax="100" id="jauge">
+          <span class="jauge__remplissage" id="jauge-remplissage"></span>
+        </div>
+        <form class="budget" id="form-budget">
+          <label for="budget">Budget mensuel</label>
+          <div class="budget__ligne">
+            <input type="number" id="budget" min="0" step="500" inputmode="numeric" placeholder="Ex. 150000">
+            <button type="submit" class="btn btn--petit">OK</button>
+          </div>
+        </form>
+      </article>
+
+      <article class="carte stat">
+        <p class="stat__label">Dépense moyenne par jour</p>
+        <p class="stat__valeur" id="moyenne-jour">0 FCFA</p>
+        <p class="stat__detail" id="plus-grosse">—</p>
+      </article>
+    </section>
+
+    <div class="grille">
+
+      <!-- ===== COLONNE GAUCHE : AJOUT + CATÉGORIES ===== -->
+      <div class="colonne">
+        <section class="carte">
+          <h2 class="carte__titre">Ajouter une dépense</h2>
+          <form id="form-depense" class="formulaire" novalidate>
+            <div class="champ">
+              <label for="description">Description</label>
+              <input type="text" id="description" maxlength="60" placeholder="Ex. Car rapide, déjeuner…" required>
+            </div>
+
+            <div class="champ-duo">
+              <div class="champ">
+                <label for="montant">Montant (FCFA)</label>
+                <input type="number" id="montant" min="1" step="1" inputmode="numeric" placeholder="Ex. 1500" required>
+              </div>
+              <div class="champ">
+                <label for="date">Date</label>
+                <input type="date" id="date" required>
+              </div>
+            </div>
+
+            <fieldset class="champ">
+              <legend>Catégorie</legend>
+              <!-- Les boutons de catégorie sont créés par app.js -->
+              <div class="categories-choix" id="categories-choix"></div>
+            </fieldset>
+
+            <p class="erreur" id="erreur" role="alert"></p>
+
+            <button type="submit" class="btn btn--plein">
+              <span aria-hidden="true">＋</span> Ajouter la dépense
+            </button>
+          </form>
+        </section>
+
+        <section class="carte">
+          <h2 class="carte__titre">Par catégorie</h2>
+          <!-- Barres de répartition, créées par app.js -->
+          <ul class="repartition" id="repartition"></ul>
+        </section>
+      </div>
+
+      <!-- ===== COLONNE DROITE : LISTE ===== -->
+      <section class="carte liste">
+        <div class="liste__tete">
+          <h2 class="carte__titre">Historique</h2>
+          <button type="button" class="btn btn--contour btn--petit" id="btn-export">
+            ⤓ Exporter (CSV)
+          </button>
+        </div>
+
+        <!-- Filtres -->
+        <div class="filtres">
+          <label class="recherche">
+            <span class="visuellement-cache">Rechercher</span>
+            <input type="search" id="recherche" placeholder="Rechercher une dépense…">
+          </label>
+          <label>
+            <span class="visuellement-cache">Filtrer par catégorie</span>
+            <select id="filtre-categorie">
+              <option value="toutes">Toutes les catégories</option>
+            </select>
+          </label>
+        </div>
+
+        <!-- La liste des dépenses, créée par app.js -->
+        <div id="liste-depenses"></div>
+
+        <!-- Message affiché quand il n'y a rien -->
+        <div class="vide" id="vide" hidden>
+          <span class="vide__icone" aria-hidden="true">🧾</span>
+          <p class="vide__titre">Aucune dépense</p>
+          <p class="vide__texte">Ajoute ta première dépense avec le formulaire.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pied conteneur">
+    <p>Projet réalisé par <a href="https://portfolioibrahimasarr.vercel.app" target="_blank" rel="noopener">Ibrahima SARR</a> · HTML, CSS &amp; JavaScript</p>
+    <p>Tes données restent uniquement dans ton navigateur.</p>
+  </footer>
+
+  <!-- Message temporaire (ex. « Dépense supprimée — Annuler ») -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span id="toast-texte"></span>
+    <button type="button" id="toast-action" hidden>Annuler</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
