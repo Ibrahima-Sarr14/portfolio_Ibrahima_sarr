@@ -300,6 +300,22 @@ h1, h2, h3 {
   to { opacity: 1; transform: none; }
 }
 
+/* ----- Bandeau défilant des technologies ----- */
+.bandeau {
+  overflow: hidden; padding: 22px 0;
+  border-block: 1px solid var(--ligne);
+  background: color-mix(in srgb, var(--fond) 60%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.bandeau__piste { display: flex; align-items: center; gap: 28px; width: max-content; animation: defile 40s linear infinite; }
+.bandeau span { font: 700 clamp(20px, 2.4vw, 28px)/1 var(--titre); letter-spacing: -0.02em; white-space: nowrap; }
+.bandeau img { height: clamp(36px, 4vw, 48px); width: auto; flex-shrink: 0; }
+/* Logos noirs (GitHub, Vercel) passés en blanc sur le thème sombre */
+:root[data-theme="dark"] .bandeau .logo-github, :root[data-theme="dark"] .bandeau .logo-vercel { filter: invert(1); }
+.bandeau i { font-style: normal; color: var(--soleil); font-size: 18px; }
+@keyframes defile { to { transform: translateX(calc(-50% - 14px)); } }
+
 /* ----- Sections ----- */
 .section {
   padding-block: clamp(56px, 8vw, 104px);
@@ -564,5 +580,6 @@ a.coord__valeur:hover { color: var(--accent-texte); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .bandeau__piste { animation: none; }
   * { transition: none !important; }
 }
