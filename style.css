@@ -19,8 +19,23 @@
   --titre: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --corps: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
 
+  --accent-texte: #f0b429;
+  --texte-doux: var(--doux);
+
   --largeur: 1120px;
   --marge: clamp(20px, 5vw, 40px);
+  color-scheme: dark;
+}
+
+/* Thème clair : choisi avec le bouton de la barre de navigation */
+:root[data-theme="light"] {
+  --fond: #f6f7fb;
+  --surface: #ffffff;
+  --ligne: #d8dde9;
+  --texte: #131b2e;
+  --doux: #566079;
+  --accent-texte: #8a5a00;
+  color-scheme: light;
 }
 
 /* ----- Base ----- */
@@ -28,7 +43,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 88px;
+  scroll-padding-top: 100px;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -38,6 +53,8 @@ body {
   color: var(--texte);
   font: 400 1.0625rem/1.65 var(--corps);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
 }
 
 img { display: block; max-width: 100%; height: auto; }
@@ -115,79 +132,111 @@ h1, h2, h3 {
 .btn--soleil { background: var(--soleil); color: var(--sur-soleil); }
 .btn--soleil:hover { background: var(--soleil-clair); }
 .btn--ligne { border-color: var(--ligne); color: var(--texte); }
-.btn--ligne:hover { border-color: var(--soleil); color: var(--soleil); }
+.btn--ligne:hover { border-color: var(--accent-texte); color: var(--accent-texte); }
 .btn--petit { padding: 10px 16px; font-size: 0.9rem; }
 
-/* ----- En-tête ----- */
+/* ----- Barre de navigation : identique à la version précédente -----
+   Barre pleine largeur floutée, liens en majuscules dans une pilule bordée,
+   une pastille foncée glisse sous le lien actif / survolé.
+   Le flou est porté par ::before : un backdrop-filter sur l'en-tête lui-même
+   deviendrait le bloc conteneur du tiroir mobile en position fixe. */
 .entete {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(14, 20, 32, 0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--ligne);
+  --violet: #a78bfa;
+  --bleu: #60a5fa;
+  --degrade: linear-gradient(120deg, var(--violet), var(--bleu));
+  --puce: rgba(167, 139, 250, 0.12);
+  --ombre-forte: 0 24px 60px -18px rgba(0, 0, 0, 0.7);
+
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s, box-shadow .2s;
 }
-.entete__barre {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  min-height: 68px;
+:root[data-theme="light"] .entete {
+  --violet: #7c3aed;
+  --bleu: #3b82f6;
+  --puce: rgba(124, 58, 237, 0.08);
+  --ombre-forte: 0 24px 60px -18px rgba(76, 29, 149, 0.32);
 }
-.marque {
-  font: 700 1.15rem/1 var(--titre);
-  letter-spacing: -0.01em;
-  text-decoration: none;
+.entete::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: color-mix(in srgb, var(--fond) 80%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px);
+}
+.entete.defile { border-bottom-color: color-mix(in srgb, var(--texte) 10%, transparent); box-shadow: 0 6px 24px -14px rgba(26, 21, 48, .25); }
+.entete__barre { display: flex; align-items: center; gap: 12px; min-height: 72px; }
+
+/* Logo : photo ronde + nom et métier sur deux lignes */
+.logo {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; gap: 12px; margin-right: auto;
+  text-decoration: none; white-space: nowrap;
+}
+.logo__mark {
+  width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; object-fit: cover;
+  border: 2px solid var(--fond);
+  box-shadow: 0 0 0 2px var(--violet), 0 6px 14px -6px rgba(124, 58, 237, .55);
+}
+.logo__texte { display: flex; flex-direction: column; line-height: 1.1; padding-left: 12px; border-left: 1px solid color-mix(in srgb, var(--texte) 16%, transparent); }
+.logo__nom { font-size: 16.5px; font-weight: 800; letter-spacing: -0.02em; }
+.logo__role {
+  margin-top: 3px; font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--texte-doux);
 }
 
-.nav { display: flex; align-items: center; gap: 28px; }
+/* Bureau : pilule bordée */
+.nav {
+  position: relative; isolation: isolate;
+  display: flex; align-items: center; gap: 2px;
+  padding: 4px; margin-right: 6px;
+  border: 1px solid var(--texte); border-radius: 999px;
+  background: color-mix(in srgb, var(--fond) 70%, #fff);
+}
+:root[data-theme="dark"] .nav { background: color-mix(in srgb, var(--fond) 85%, #fff); }
 .nav a {
-  position: relative;
-  padding-block: 6px;
-  color: var(--doux);
-  font-weight: 500;
-  font-size: 0.975rem;
-  text-decoration: none;
-  transition: color 0.2s;
+  position: relative; z-index: 1;
+  display: flex; align-items: center; min-height: 38px; padding: 0 16px;
+  border-radius: 999px; text-decoration: none; white-space: nowrap;
+  font-size: 12.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--texte); transition: color .25s;
 }
-.nav a:hover { color: var(--texte); }
-.nav a.actif,
-.nav a[aria-current="page"] { color: var(--texte); }
-.nav a.actif::after,
-.nav a[aria-current="page"]::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: -2px;
-  height: 2px;
-  background: var(--soleil);
+.nav a.sous-pilule { color: var(--fond); }
+.nav__pilule {
+  position: absolute; z-index: 0; top: 4px; left: 0;
+  height: 38px; width: 0; border-radius: 999px;
+  background: var(--texte); opacity: 0; pointer-events: none;
+  transition: transform .45s cubic-bezier(.22, 1, .36, 1), width .45s cubic-bezier(.22, 1, .36, 1), opacity .2s;
 }
 
-.entete__actions { display: flex; align-items: center; gap: 12px; }
+.entete__actions { position: relative; z-index: 2; display: flex; gap: 4px; }
+.btn-icone {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: transparent; border: 0; color: var(--texte);
+  cursor: pointer; transition: background .2s;
+}
+.btn-icone:hover { background: var(--puce); }
+.btn-icone svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 
-.burger {
-  display: none;
-  width: 44px; height: 44px;
-  padding: 0;
-  border: 1px solid var(--ligne);
-  border-radius: 8px;
-  background: transparent;
-  cursor: pointer;
-}
-.burger span {
-  display: block;
-  width: 18px; height: 2px;
-  margin: 4px auto;
-  background: var(--texte);
-  transition: transform 0.2s, opacity 0.2s;
-}
+/* Icône lune en clair, soleil en sombre */
+.ico-soleil { display: none; }
+:root[data-theme="dark"] .ico-lune { display: none; }
+:root[data-theme="dark"] .ico-soleil { display: block; }
+
+.burger { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0; }
+.burger span { display: block; width: 18px; height: 2px; background: currentColor; border-radius: 2px; transition: transform .25s, opacity .25s; }
 .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
+/* Barre de progression de lecture */
+.progression {
+  position: absolute; left: 0; bottom: -1px; width: 100%; height: 3px;
+  background: var(--degrade); transform: scaleX(0); transform-origin: 0 50%;
+}
+
 /* ----- Accueil ----- */
 .hero {
-  padding-block: clamp(48px, 8vw, 104px) clamp(56px, 8vw, 96px);
+  padding-block: calc(72px + clamp(40px, 7vw, 88px)) clamp(56px, 8vw, 96px);
 }
 .hero__grille {
   display: grid;
@@ -280,7 +329,7 @@ h1, h2, h3 {
   background: var(--surface);
   transition: border-color 0.2s;
 }
-.projet__image:hover { border-color: var(--soleil); }
+.projet__image:hover { border-color: var(--accent-texte); }
 
 .projet__nom { font-size: clamp(1.5rem, 2.6vw, 1.9rem); }
 .projet__resume { margin-top: 10px; color: var(--doux); }
@@ -337,7 +386,7 @@ h1, h2, h3 {
   font-weight: 500;
   text-decoration: none;
 }
-a.coord__valeur:hover { color: var(--soleil); }
+a.coord__valeur:hover { color: var(--accent-texte); }
 .coord__copier {
   flex: none;
   display: grid;
@@ -350,7 +399,7 @@ a.coord__valeur:hover { color: var(--soleil); }
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s;
 }
-.coord__copier:hover { border-color: var(--soleil); color: var(--soleil); }
+.coord__copier:hover { border-color: var(--accent-texte); color: var(--accent-texte); }
 .coord__copier svg {
   width: 18px; height: 18px;
   fill: none;
@@ -364,7 +413,7 @@ a.coord__valeur:hover { color: var(--soleil); }
 .pied { padding-block: 32px; border-top: 1px solid var(--ligne); color: var(--doux); font-size: 0.9rem; }
 .pied__contenu { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
 .pied a { text-decoration: none; }
-.pied a:hover { color: var(--soleil); }
+.pied a:hover { color: var(--accent-texte); }
 
 /* ----- Message « Copié » ----- */
 .toast {
@@ -388,7 +437,7 @@ a.coord__valeur:hover { color: var(--soleil); }
 /* =========================================================
    Page « étude de cas »
    ========================================================= */
-.cas-intro { padding-block: clamp(40px, 6vw, 80px) clamp(32px, 5vw, 56px); }
+.cas-intro { padding-block: calc(72px + clamp(32px, 5vw, 64px)) clamp(32px, 5vw, 56px); }
 .cas-retour {
   display: inline-flex;
   align-items: center;
@@ -398,7 +447,7 @@ a.coord__valeur:hover { color: var(--soleil); }
   font-size: 0.95rem;
   text-decoration: none;
 }
-.cas-retour:hover { color: var(--soleil); }
+.cas-retour:hover { color: var(--accent-texte); }
 .cas-retour svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .cas-intro h1 { font-size: clamp(2.4rem, 6vw, 4rem); letter-spacing: -0.03em; }
 .cas-intro__accroche { max-width: 58ch; margin-top: 18px; color: var(--doux); font-size: 1.125rem; }
@@ -465,29 +514,33 @@ a.coord__valeur:hover { color: var(--soleil); }
 /* =========================================================
    Petits écrans
    ========================================================= */
-@media (max-width: 860px) {
-  .burger { display: block; }
-  .entete__actions .btn { display: none; }
 
+/* Menu en tiroir (tablette et mobile), comme avant :
+   clip-path plutôt que translateX, pour ne pas élargir la zone défilable. */
+@media (max-width: 900px) {
+  .burger { display: flex; }
   .nav {
-    position: absolute;
-    left: 0; right: 0; top: 100%;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 8px var(--marge) 16px;
-    background: var(--fond);
-    border-bottom: 1px solid var(--ligne);
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 1;
+    width: min(22rem, 100%); margin: 0;
+    flex-direction: column; align-items: stretch; gap: 4px;
+    padding: 88px 16px 24px;
+    background: var(--fond); border: 0; border-left: 1px solid color-mix(in srgb, var(--texte) 12%, transparent);
+    border-radius: 0; box-shadow: var(--ombre-forte);
+    clip-path: inset(0 0 0 100%); visibility: hidden;
+    transition: clip-path .3s cubic-bezier(.4, 0, 1, 1), visibility 0s linear .3s;
   }
-  .nav.ouvert { display: flex; }
-  .nav a { padding-block: 14px; border-top: 1px solid var(--ligne); font-size: 1.05rem; }
-  .nav a:first-child { border-top: 0; }
-  .nav a.actif::after,
-  .nav a[aria-current="page"]::after { display: none; }
-  .nav a.actif,
-  .nav a[aria-current="page"] { color: var(--soleil); }
+  :root[data-theme="dark"] .nav { background: var(--fond); }
+  .nav.ouvert {
+    clip-path: inset(0); visibility: visible;
+    transition: clip-path .4s cubic-bezier(.22, 1, .36, 1), visibility 0s;
+  }
+  .nav a { min-height: 48px; padding: 0 18px; font-size: 16px; letter-spacing: 0; text-transform: none; color: var(--texte-doux); }
+  .nav a:hover { color: var(--texte); background: var(--puce); }
+  .nav a.actif { color: var(--fond); background: var(--texte); font-weight: 700; }
+  .nav__pilule { display: none; }
+}
 
+@media (max-width: 860px) {
   .hero__grille,
   .projet,
   .contact,
@@ -498,6 +551,10 @@ a.coord__valeur:hover { color: var(--soleil); }
   .ligne { grid-template-columns: minmax(0, 1fr); }
   .fiche { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .fonctions { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .entete__barre { min-height: 64px; }
 }
 
 @media (max-width: 480px) {
