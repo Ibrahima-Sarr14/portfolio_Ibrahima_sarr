@@ -7,7 +7,7 @@ const racine = document.documentElement;
 const btnTheme = document.getElementById('btn-theme');
 
 function themeActuel() {
-  return racine.getAttribute('data-theme') || 'light';
+  return racine.getAttribute('data-theme') || 'dark';
 }
 
 btnTheme.addEventListener('click', () => {
@@ -182,6 +182,38 @@ document.querySelectorAll('[data-copier]').forEach(bouton => {
     }
   });
 });
+
+// ----- Horloge de Dakar en direct -----
+const horloge = document.getElementById('horloge');
+if (horloge) {
+  const format = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Africa/Dakar', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const tic = () => { horloge.textContent = format.format(new Date()); };
+  tic();
+  setInterval(tic, 1000);
+}
+
+// ----- Bouton à maintenir : ouvre WhatsApp après 1,1 s -----
+const lancer = document.getElementById('lancer');
+if (lancer) {
+  const LIEN = 'https://wa.me/221762138445';
+  let minuteurLancer;
+  const demarrer = () => {
+    lancer.classList.add('actif');
+    clearTimeout(minuteurLancer);
+    minuteurLancer = setTimeout(() => {
+      lancer.classList.remove('actif');
+      window.open(LIEN, '_blank', 'noopener');
+    }, 1100);
+  };
+  const arreter = () => { clearTimeout(minuteurLancer); lancer.classList.remove('actif'); };
+  lancer.addEventListener('pointerdown', demarrer);
+  ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => lancer.addEventListener(ev, arreter));
+  lancer.addEventListener('contextmenu', e => e.preventDefault());
+  // Clavier : Entrée ou Espace ouvre directement
+  lancer.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.open(LIEN, '_blank', 'noopener'); }
+  });
+}
 
 // ----- Année du pied de page -----
 document.getElementById('annee').textContent = new Date().getFullYear();
